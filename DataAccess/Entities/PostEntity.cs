@@ -9,7 +9,7 @@ namespace DataAccess.Entities
         public string Author { get; set; } = string.Empty;
         public string Title { get; set; } = string.Empty;
         public DateTime CreatedAt { get; set; } = DateTime.Now;
-        public List<TagEntity> Tags { get; set; } = new();
+        public ICollection<TagEntity> Tags { get; set; } = new List<TagEntity>();
         
         public PostDTO ToDomain() => new()
         {

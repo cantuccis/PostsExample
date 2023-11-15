@@ -1,3 +1,6 @@
+using BusinessLogic.Controllers;
+using BusinessLogic.Interfaces;
+using DataAccess.Repositories;
 using Frontend.Data;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
@@ -8,6 +11,15 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddSingleton<WeatherForecastService>();
+
+var config = builder.Configuration;
+
+IPostsRepository postsRepo = new EFPostsRepository(config);
+ITagsRepository tagsRepo = new EFTagsRepository(config);
+FeedManager feedManager = new FeedManager(postsRepo, tagsRepo);
+
+builder.Services.AddSingleton<WeatherForecastService>();
+
 
 var app = builder.Build();
 

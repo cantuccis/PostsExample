@@ -24,7 +24,7 @@ namespace DataAccess
                 .Build();
 
             var parsed = bool.TryParse(Config?.GetSection("Env")["Testing"], out bool isTesting);
-            isTesting = isTesting && parsed;
+            isTesting = parsed && isTesting;
 
             string connectionString = Config?
                 .GetConnectionString(isTesting ? "PostsDBTest" : "PostsDB") 
